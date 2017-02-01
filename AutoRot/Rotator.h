@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FileRotation.m"
+#import "FileRotation.h"
 
 @protocol RotatorDelegate<NSObject>
 @required

@@ -33,16 +33,16 @@
         task.launchPath = cmdPath;
         [self setupDataLoop];
         
-        __weak Rotator * weakSelf = self;
         terminateObserver = [[NSNotificationCenter defaultCenter]
          addObserverForName:NSTaskDidTerminateNotification
          object:task
          queue:nil
          usingBlock:^(NSNotification * note) {
              dispatch_sync(dispatch_get_main_queue(), ^{
-                 [weakSelf gotDone];
+                 [self gotDone];
              });
          }];
+        
         [task launch];
     }
     return self;
@@ -61,7 +61,6 @@
 - (void)setupDataLoop {
     task.standardOutput = [NSPipe pipe];
     [[task.standardOutput fileHandleForReading] waitForDataInBackgroundAndNotify];
-    __weak Rotator * weakSelf = self;
     stdoutObserver = [[NSNotificationCenter defaultCenter]
      addObserverForName:NSFileHandleDataAvailableNotification
      object:[task.standardOutput fileHandleForReading]
@@ -69,7 +68,7 @@
      usingBlock:^(NSNotification * note) {
          NSData * output = [[task.standardOutput fileHandleForReading] availableData];
          dispatch_sync(dispatch_get_main_queue(), ^{
-             [weakSelf gotData:output];
+             [self gotData:output];
          });
          [[task.standardOutput fileHandleForReading] waitForDataInBackgroundAndNotify];
      }];
@@ -85,6 +84,10 @@
     BOOL gotLine = NO;
     while ((nextLine = [self nextLineFromBuffer])) {
         FileRotation * rot = [[FileRotation alloc] initWithData:nextLine];
+        if (!rot) {
+            NSLog(@"bad rotation: %@", nextLine);
+            continue;
+        }
         if (rotations == nil) {
             rotations = [NSArray arrayWithObject:rot];
         } else {
