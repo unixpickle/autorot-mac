@@ -11,7 +11,7 @@
 
 @protocol RotatorDelegate<NSObject>
 @required
-- (void)rotatorGotData:(id)sender;
+- (void)rotator:(id)sender gotRotation:(FileRotation *)rotation;
 - (void)rotatorDone:(id)sender;
 @end
 
@@ -23,11 +23,12 @@
     id terminateObserver;
 }
 
+@property (nonatomic, strong) NSString * directory;
 @property (nonatomic, weak) id<RotatorDelegate> delegate;
-@property (readonly) NSArray<FileRotation *> * rotations;
 @property (readonly) BOOL done;
 
 - (id)initWithDirectory:(NSString *)directory;
+- (BOOL)start;
 - (void)stop;
 
 @end

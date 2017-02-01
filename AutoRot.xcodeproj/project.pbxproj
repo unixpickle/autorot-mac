@@ -14,6 +14,7 @@
 		FA9BB6591E4247A200BD5F9D /* Rotator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9BB6581E4247A200BD5F9D /* Rotator.m */; };
 		FA9BB65C1E4247F100BD5F9D /* FileRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9BB65B1E4247F100BD5F9D /* FileRotation.m */; };
 		FA9BB65E1E42493600BD5F9D /* autorot_classify in Resources */ = {isa = PBXBuildFile; fileRef = FA9BB65D1E42493600BD5F9D /* autorot_classify */; };
+		FA9BB6601E4258E800BD5F9D /* autorot_net in Resources */ = {isa = PBXBuildFile; fileRef = FA9BB65F1E42494500BD5F9D /* autorot_net */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +145,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9BB6601E4258E800BD5F9D /* autorot_net in Resources */,
 				FA9BB65E1E42493600BD5F9D /* autorot_classify in Resources */,
 				FA9BB64D1E42477800BD5F9D /* Assets.xcassets in Resources */,
 				FA9BB6501E42477800BD5F9D /* MainMenu.xib in Resources */,

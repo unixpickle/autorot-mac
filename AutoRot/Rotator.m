@@ -19,33 +19,43 @@
 @implementation Rotator
 
 @synthesize delegate;
-@synthesize rotations;
 @synthesize done;
 
 - (id)initWithDirectory:(NSString *)directory {
     if ((self = [super init])) {
-        NSString * netPath = [[NSBundle mainBundle] pathForResource:@"autorot_net"
-                                                             ofType:nil];
-        NSString * cmdPath = [[NSBundle mainBundle] pathForResource:@"autorot_classify"
-                                                             ofType:nil];
-        task = [[NSTask alloc] init];
-        task.arguments = @[@"-net", netPath, @"-dir", directory];
-        task.launchPath = cmdPath;
-        [self setupDataLoop];
-        
-        terminateObserver = [[NSNotificationCenter defaultCenter]
-         addObserverForName:NSTaskDidTerminateNotification
-         object:task
-         queue:nil
-         usingBlock:^(NSNotification * note) {
-             dispatch_sync(dispatch_get_main_queue(), ^{
-                 [self gotDone];
-             });
-         }];
-        
-        [task launch];
+        self.directory = directory;
     }
     return self;
+}
+
+- (BOOL)start {
+    if (task) {
+        return NO;
+    }
+    NSString * netPath = [[NSBundle mainBundle] pathForResource:@"autorot_net"
+                                                         ofType:nil];
+    NSString * cmdPath = [[NSBundle mainBundle] pathForResource:@"autorot_classify"
+                                                         ofType:nil];
+    if (netPath == nil || cmdPath == nil) {
+        return NO;
+    }
+    task = [[NSTask alloc] init];
+    task.arguments = @[@"-net", netPath, @"-dir", self.directory];
+    task.launchPath = cmdPath;
+    [self setupDataLoop];
+    
+    terminateObserver = [[NSNotificationCenter defaultCenter]
+                         addObserverForName:NSTaskDidTerminateNotification
+                         object:task
+                         queue:nil
+                         usingBlock:^(NSNotification * note) {
+                             dispatch_async(dispatch_get_main_queue(), ^{
+                                 [self gotDone];
+                             });
+                         }];
+    
+    [task launch];
+    return YES;
 }
 
 - (void)stop {
@@ -67,7 +77,7 @@
      queue:nil
      usingBlock:^(NSNotification * note) {
          NSData * output = [[task.standardOutput fileHandleForReading] availableData];
-         dispatch_sync(dispatch_get_main_queue(), ^{
+         dispatch_async(dispatch_get_main_queue(), ^{
              [self gotData:output];
          });
          [[task.standardOutput fileHandleForReading] waitForDataInBackgroundAndNotify];
@@ -81,24 +91,13 @@
         [outputBuffer appendData:data];
     }
     NSData * nextLine;
-    BOOL gotLine = NO;
     while ((nextLine = [self nextLineFromBuffer])) {
         FileRotation * rot = [[FileRotation alloc] initWithData:nextLine];
         if (!rot) {
             NSLog(@"bad rotation: %@", nextLine);
             continue;
         }
-        if (rotations == nil) {
-            rotations = [NSArray arrayWithObject:rot];
-        } else {
-            NSMutableArray * rots = [NSMutableArray arrayWithArray:rotations];
-            [rots addObject:rot];
-            rotations = rots;
-        }
-        gotLine = YES;
-    }
-    if (gotLine) {
-        [self.delegate rotatorGotData:self];
+        [self.delegate rotator:self gotRotation:rot];
     }
 }
 
