@@ -147,8 +147,9 @@
                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="cFg-8b-PVI" customClass="ComparisonView">
                                             <rect key="frame" x="17" y="17" width="400" height="244"/>
                                         </customView>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C3c-pd-CZS">
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3c-pd-CZS">
                                             <rect key="frame" x="131" y="127" width="172" height="23"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Nothing to approve" id="Ouo-6j-ZeY">
                                                 <font key="font" metaFont="system" size="19"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -157,14 +158,10 @@
                                         </textField>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="C3c-pd-CZS" secondAttribute="bottom" constant="127" id="0IF-w4-1fc"/>
                                         <constraint firstItem="cFg-8b-PVI" firstAttribute="leading" secondItem="Kkf-Em-8RW" secondAttribute="leading" constant="17" id="6MQ-cX-1l1"/>
                                         <constraint firstAttribute="trailing" secondItem="cFg-8b-PVI" secondAttribute="trailing" constant="17" id="9TM-fs-haV"/>
                                         <constraint firstItem="cFg-8b-PVI" firstAttribute="top" secondItem="Kkf-Em-8RW" secondAttribute="top" constant="3" id="C1K-cb-2M1"/>
-                                        <constraint firstAttribute="trailing" secondItem="C3c-pd-CZS" secondAttribute="trailing" constant="133" id="HAj-9H-XLo"/>
-                                        <constraint firstItem="C3c-pd-CZS" firstAttribute="leading" secondItem="Kkf-Em-8RW" secondAttribute="leading" constant="133" id="WXd-qk-hJZ"/>
                                         <constraint firstAttribute="bottom" secondItem="cFg-8b-PVI" secondAttribute="bottom" constant="17" id="a7C-6N-SfR"/>
-                                        <constraint firstItem="C3c-pd-CZS" firstAttribute="top" secondItem="Kkf-Em-8RW" secondAttribute="top" constant="114" id="cp3-7C-2Xw"/>
                                         <constraint firstItem="cFg-8b-PVI" firstAttribute="top" secondItem="Kkf-Em-8RW" secondAttribute="top" constant="3" id="g8y-XK-pSr"/>
                                     </constraints>
                                 </view>
@@ -259,14 +256,15 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="1sf-AJ-psq" secondAttribute="bottom" constant="20" id="8Hc-fa-CBW"/>
-                    <constraint firstItem="qCE-sR-EXc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="8PK-ZR-xBa"/>
-                    <constraint firstItem="1sf-AJ-psq" firstAttribute="top" secondItem="qCE-sR-EXc" secondAttribute="bottom" constant="9" id="CxA-Vc-kcb"/>
-                    <constraint firstAttribute="trailing" secondItem="1sf-AJ-psq" secondAttribute="trailing" constant="20" id="DzP-bL-990"/>
-                    <constraint firstItem="qCE-sR-EXc" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="Vss-zR-W32"/>
-                    <constraint firstAttribute="trailing" secondItem="qCE-sR-EXc" secondAttribute="trailing" constant="20" id="mfk-uY-Oo3"/>
+                    <constraint firstItem="qCE-sR-EXc" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="DsF-Xo-1Ck"/>
+                    <constraint firstItem="1sf-AJ-psq" firstAttribute="top" secondItem="qCE-sR-EXc" secondAttribute="bottom" constant="9" id="F6i-mA-Hip"/>
+                    <constraint firstAttribute="trailing" secondItem="qCE-sR-EXc" secondAttribute="trailing" constant="20" id="G5T-Vj-NUd"/>
+                    <constraint firstAttribute="trailing" secondItem="1sf-AJ-psq" secondAttribute="trailing" constant="20" id="Qci-0M-W0j"/>
+                    <constraint firstAttribute="bottom" secondItem="1sf-AJ-psq" secondAttribute="bottom" constant="20" id="TAE-8Y-TyE"/>
+                    <constraint firstItem="qCE-sR-EXc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="rwd-Sr-eI4"/>
                 </constraints>
             </view>
+            <point key="canvasLocation" x="139" y="162"/>
         </window>
         <customView id="tvf-JF-5FA">
             <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
