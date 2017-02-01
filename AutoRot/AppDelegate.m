@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "ComparisonView.h"
 
+static NSData * encodeToPNG(NSImage * img);
+static NSData * encodeToJPEG(NSImage * img);
+
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow * window;
@@ -66,16 +69,12 @@
 
 - (void)updateApprovalView {
     if (currentApprove) {
-        if (!self.comparisonView.superview) {
-            [self.noComparisonLabel.superview addSubview:self.comparisonView];
-        }
-        [self.noComparisonLabel removeFromSuperview];
+        self.comparisonView.hidden = NO;
+        self.noComparisonLabel.hidden = YES;
         [self.comparisonView takeImagesFromRotation:currentApprove];
     } else {
-        if (!self.noComparisonLabel.superview) {
-            [self.comparisonView.superview addSubview:self.noComparisonLabel];
-        }
-        [self.comparisonView removeFromSuperview];
+        self.comparisonView.hidden = YES;
+        self.noComparisonLabel.hidden = NO;
     }
 }
 
@@ -121,7 +120,18 @@
     if (!currentApprove) {
         return;
     }
-    // TODO: overwrite image file here.
+    NSImage * newImage = self.comparisonView.right.image;
+    NSString * path = currentApprove.path;
+    NSData * data;
+    if ([[path lowercaseString] hasSuffix:@".png"]) {
+        data = encodeToPNG(newImage);
+    } else {
+        data = encodeToJPEG(newImage);
+    }
+    [[NSFileManager defaultManager] trashItemAtURL:[NSURL fileURLWithPath:path]
+                                  resultingItemURL:nil
+                                             error:nil];
+    [data writeToFile:path atomically:YES];
     [approveQueue removeObject:currentApprove];
     [self showNextApproval];
 }
@@ -163,3 +173,18 @@
 }
 
 @end
+
+static NSData * imageToData(NSImage * img, NSBitmapImageFileType type, NSDictionary * opts) {
+    CGImageRef cgRef = [img CGImageForProposedRect:NULL context:nil hints:nil];
+    NSBitmapImageRep * rep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
+    rep.size = img.size;
+    return [rep representationUsingType:type properties:opts];
+}
+
+static NSData * encodeToPNG(NSImage * img) {
+    return imageToData(img, NSPNGFileType, @{});
+}
+
+static NSData * encodeToJPEG(NSImage * img) {
+    return imageToData(img, NSJPEGFileType, @{NSImageCompressionFactor: @1});
+}
