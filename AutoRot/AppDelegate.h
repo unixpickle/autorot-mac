@@ -9,8 +9,10 @@
 #import <Cocoa/Cocoa.h>
 #import "Rotator.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, RotatorDelegate> {
+@interface AppDelegate : NSObject <NSApplicationDelegate, RotatorDelegate,
+    NSTableViewDelegate, NSTableViewDataSource> {
     Rotator * rotator;
+    NSMutableArray<FileRotation *> * logEntries;
 }
 
 @end

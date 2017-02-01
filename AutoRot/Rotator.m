@@ -103,6 +103,7 @@
 
 - (void)gotDone {
     if (!done) {
+        [self gotData:[[task.standardOutput fileHandleForReading] availableData]];
         done = YES;
         [self.delegate rotatorDone:self];
         [self removeObservers];

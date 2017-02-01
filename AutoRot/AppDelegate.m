@@ -10,12 +10,18 @@
 
 @interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSWindow * window;
+@property (weak) IBOutlet NSTextField * statusLabel;
+@property (weak) IBOutlet NSTableView * tableView;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    logEntries = [[NSMutableArray alloc] init];
+    [self.window center];
+    [self.window setMinSize:NSMakeSize(400, 300)];
     NSOpenPanel * openDlg = [NSOpenPanel openPanel];
     [openDlg setCanChooseFiles:NO];
     [openDlg setCanChooseDirectories:YES];
@@ -26,8 +32,9 @@
             NSString * path = files[0].path;
             rotator = [[Rotator alloc] initWithDirectory:path];
             rotator.delegate = self;
+            [self.statusLabel setStringValue:@"Processing images..."];
             if (![rotator start]) {
-                NSLog(@"Start failed");
+                [self.statusLabel setStringValue:@"Internal error"];
             }
         }
     }];
@@ -38,11 +45,30 @@
 }
 
 - (void)rotatorDone:(id)sender {
-    NSLog(@"Rotator done");
+    [self.statusLabel setStringValue:[NSString stringWithFormat:@"Done processing %lu images",
+                                      logEntries.count]];
 }
 
 - (void)rotator:(id)sender gotRotation:(FileRotation *)rotation {
-    NSLog(@"Got rotation: %@ %lf", rotation.path, rotation.angle);
+    [logEntries addObject:rotation];
+    [self.statusLabel setStringValue:[NSString stringWithFormat:@"Processed %lu images...",
+                                      logEntries.count]];
+    [self.tableView reloadData];
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return logEntries.count;
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn
+            row:(NSInteger)row {
+    FileRotation * entry = logEntries[row];
+    if ([tableColumn.identifier isEqualToString:@"path"]) {
+        return entry.path;
+    } else if ([tableColumn.identifier isEqualToString:@"angle"]) {
+        return [NSNumber numberWithDouble:entry.angle * 180 / M_PI];
+    }
+    return nil;
 }
 
 @end
