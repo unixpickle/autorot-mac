@@ -11,6 +11,9 @@
 		FA9BB64B1E42477800BD5F9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9BB64A1E42477800BD5F9D /* main.m */; };
 		FA9BB64D1E42477800BD5F9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA9BB64C1E42477800BD5F9D /* Assets.xcassets */; };
 		FA9BB6501E42477800BD5F9D /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9BB64E1E42477800BD5F9D /* MainMenu.xib */; };
+		FA9BB6591E4247A200BD5F9D /* Rotator.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9BB6581E4247A200BD5F9D /* Rotator.m */; };
+		FA9BB65C1E4247F100BD5F9D /* FileRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9BB65B1E4247F100BD5F9D /* FileRotation.m */; };
+		FA9BB65E1E42493600BD5F9D /* autorot_classify in Resources */ = {isa = PBXBuildFile; fileRef = FA9BB65D1E42493600BD5F9D /* autorot_classify */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +24,12 @@
 		FA9BB64C1E42477800BD5F9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA9BB64F1E42477800BD5F9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		FA9BB6511E42477800BD5F9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FA9BB6571E4247A200BD5F9D /* Rotator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rotator.h; sourceTree = "<group>"; };
+		FA9BB6581E4247A200BD5F9D /* Rotator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rotator.m; sourceTree = "<group>"; };
+		FA9BB65A1E4247F100BD5F9D /* FileRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileRotation.h; sourceTree = "<group>"; };
+		FA9BB65B1E4247F100BD5F9D /* FileRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileRotation.m; sourceTree = "<group>"; };
+		FA9BB65D1E42493600BD5F9D /* autorot_classify */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = autorot_classify; sourceTree = "<group>"; };
+		FA9BB65F1E42494500BD5F9D /* autorot_net */ = {isa = PBXFileReference; lastKnownFileType = file; path = autorot_net; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,10 @@
 				FA9BB64E1E42477800BD5F9D /* MainMenu.xib */,
 				FA9BB6511E42477800BD5F9D /* Info.plist */,
 				FA9BB6491E42477800BD5F9D /* Supporting Files */,
+				FA9BB6571E4247A200BD5F9D /* Rotator.h */,
+				FA9BB6581E4247A200BD5F9D /* Rotator.m */,
+				FA9BB65A1E4247F100BD5F9D /* FileRotation.h */,
+				FA9BB65B1E4247F100BD5F9D /* FileRotation.m */,
 			);
 			path = AutoRot;
 			sourceTree = "<group>";
@@ -66,6 +79,8 @@
 		FA9BB6491E42477800BD5F9D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA9BB65F1E42494500BD5F9D /* autorot_net */,
+				FA9BB65D1E42493600BD5F9D /* autorot_classify */,
 				FA9BB64A1E42477800BD5F9D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -129,6 +144,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA9BB65E1E42493600BD5F9D /* autorot_classify in Resources */,
 				FA9BB64D1E42477800BD5F9D /* Assets.xcassets in Resources */,
 				FA9BB6501E42477800BD5F9D /* MainMenu.xib in Resources */,
 			);
@@ -142,6 +158,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA9BB64B1E42477800BD5F9D /* main.m in Sources */,
+				FA9BB65C1E4247F100BD5F9D /* FileRotation.m in Sources */,
+				FA9BB6591E4247A200BD5F9D /* Rotator.m in Sources */,
 				FA9BB6481E42477800BD5F9D /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
