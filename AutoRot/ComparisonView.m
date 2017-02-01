@@ -7,6 +7,7 @@
 //
 
 #import "ComparisonView.h"
+#import "ANImageBitmapRep.h"
 
 #define MARGINS 10
 #define LABEL_HEIGHT 25
@@ -29,6 +30,16 @@
         [self initializeSubviews];
     }
     return self;
+}
+
+- (void)takeImagesFromRotation:(FileRotation *)rot {
+    NSString * path = rot.path;
+    NSImage * img = [[NSImage alloc] initWithContentsOfFile:path];
+    [self.left setImage:img];
+    ANImageBitmapRep * bitmapRep = [img imageBitmapRep];
+    [bitmapRep rotate:rot.angle*180/M_PI];
+    NSImage * rotated = [bitmapRep image];
+    [self.right setImage:rotated];
 }
 
 - (BOOL)isFlipped {

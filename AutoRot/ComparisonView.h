@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FileRotation.h"
 
 @interface ComparisonView : NSView
 
@@ -17,5 +18,7 @@
 
 - (id)initWithFrame:(NSRect)frameRect;
 - (id)initWithCoder:(NSCoder *)coder;
+
+- (void)takeImagesFromRotation:(FileRotation *)rot;
 
 @end
