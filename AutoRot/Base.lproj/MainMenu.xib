@@ -15,6 +15,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="comparisonView" destination="cFg-8b-PVI" id="6w6-kZ-KeH"/>
                 <outlet property="statusLabel" destination="1sf-AJ-psq" id="rMm-TO-Je4"/>
                 <outlet property="tableView" destination="WGS-Ck-qXg" id="Wu4-6c-GLT"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -123,6 +124,17 @@
                                 <view key="view" id="Kkf-Em-8RW">
                                     <rect key="frame" x="10" y="33" width="434" height="264"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <customView translatesAutoresizingMaskIntoConstraints="NO" id="cFg-8b-PVI" customClass="ComparisonView">
+                                            <rect key="frame" x="17" y="17" width="400" height="244"/>
+                                        </customView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="cFg-8b-PVI" firstAttribute="leading" secondItem="Kkf-Em-8RW" secondAttribute="leading" constant="17" id="6MQ-cX-1l1"/>
+                                        <constraint firstAttribute="trailing" secondItem="cFg-8b-PVI" secondAttribute="trailing" constant="17" id="9TM-fs-haV"/>
+                                        <constraint firstAttribute="bottom" secondItem="cFg-8b-PVI" secondAttribute="bottom" constant="17" id="a7C-6N-SfR"/>
+                                        <constraint firstItem="cFg-8b-PVI" firstAttribute="top" secondItem="Kkf-Em-8RW" secondAttribute="top" constant="3" id="g8y-XK-pSr"/>
+                                    </constraints>
                                 </view>
                             </tabViewItem>
                             <tabViewItem label="Log" identifier="2" id="eqA-du-qzq">
@@ -137,7 +149,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="8Wb-Dp-HcX" id="WGS-Ck-qXg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="228"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="228"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <size key="intercellSpacing" width="3" height="2"/>
                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -186,16 +198,20 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </scroller>
                                             <tableHeaderView key="headerView" id="8Wb-Dp-HcX">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="23"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="402" height="23"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </tableHeaderView>
                                         </scrollView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="HyG-ht-tMS" firstAttribute="leading" secondItem="2JP-6w-rZL" secondAttribute="leading" constant="17" id="AYT-MH-fT5"/>
+                                        <constraint firstAttribute="bottom" secondItem="HyG-ht-tMS" secondAttribute="bottom" constant="9" id="Fzk-E5-2Vn"/>
                                         <constraint firstAttribute="trailing" secondItem="HyG-ht-tMS" secondAttribute="trailing" constant="17" id="XdD-yw-SFR"/>
+                                        <constraint firstItem="HyG-ht-tMS" firstAttribute="top" secondItem="2JP-6w-rZL" secondAttribute="top" constant="3" id="duF-km-Nua"/>
                                         <constraint firstAttribute="bottom" secondItem="HyG-ht-tMS" secondAttribute="bottom" constant="9" id="f8f-lR-ncf"/>
                                         <constraint firstItem="HyG-ht-tMS" firstAttribute="top" secondItem="2JP-6w-rZL" secondAttribute="top" constant="3" id="gSS-Rg-nfd"/>
+                                        <constraint firstAttribute="trailing" secondItem="HyG-ht-tMS" secondAttribute="trailing" constant="17" id="mTv-vM-7O6"/>
+                                        <constraint firstItem="HyG-ht-tMS" firstAttribute="leading" secondItem="2JP-6w-rZL" secondAttribute="leading" constant="17" id="muU-QX-BXW"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -211,14 +227,19 @@
                     </textField>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="qCE-sR-EXc" secondAttribute="trailing" constant="20" id="1hY-GE-mtw"/>
-                    <constraint firstAttribute="trailing" secondItem="1sf-AJ-psq" secondAttribute="trailing" constant="20" id="717-SO-UoU"/>
-                    <constraint firstAttribute="bottom" secondItem="1sf-AJ-psq" secondAttribute="bottom" constant="20" id="DlT-VC-IRE"/>
-                    <constraint firstItem="qCE-sR-EXc" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="Sts-Oq-SVR"/>
-                    <constraint firstItem="qCE-sR-EXc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="YLy-H4-Pg9"/>
-                    <constraint firstItem="1sf-AJ-psq" firstAttribute="top" secondItem="qCE-sR-EXc" secondAttribute="bottom" constant="9" id="k65-6x-z52"/>
+                    <constraint firstAttribute="bottom" secondItem="1sf-AJ-psq" secondAttribute="bottom" constant="20" id="8Hc-fa-CBW"/>
+                    <constraint firstItem="qCE-sR-EXc" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="8PK-ZR-xBa"/>
+                    <constraint firstItem="1sf-AJ-psq" firstAttribute="top" secondItem="qCE-sR-EXc" secondAttribute="bottom" constant="9" id="CxA-Vc-kcb"/>
+                    <constraint firstAttribute="trailing" secondItem="1sf-AJ-psq" secondAttribute="trailing" constant="20" id="DzP-bL-990"/>
+                    <constraint firstItem="qCE-sR-EXc" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="Vss-zR-W32"/>
+                    <constraint firstAttribute="trailing" secondItem="qCE-sR-EXc" secondAttribute="trailing" constant="20" id="mfk-uY-Oo3"/>
                 </constraints>
             </view>
         </window>
+        <customView id="tvf-JF-5FA">
+            <rect key="frame" x="0.0" y="0.0" width="476" height="285"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <point key="canvasLocation" x="736" y="22.5"/>
+        </customView>
     </objects>
 </document>

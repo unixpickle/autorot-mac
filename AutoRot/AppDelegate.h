@@ -13,6 +13,8 @@
     NSTableViewDelegate, NSTableViewDataSource> {
     Rotator * rotator;
     NSMutableArray<FileRotation *> * logEntries;
+    NSMutableArray<FileRotation *> * approveQueue;
+    FileRotation * currentApprove;
 }
 
 @end

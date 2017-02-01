@@ -7,18 +7,23 @@
 //
 
 #import "AppDelegate.h"
+#import "ComparisonView.h"
 
 @interface AppDelegate ()
 
 @property (weak) IBOutlet NSWindow * window;
 @property (weak) IBOutlet NSTextField * statusLabel;
 @property (weak) IBOutlet NSTableView * tableView;
+@property (weak) IBOutlet ComparisonView * comparisonView;
+
+- (void)showNextApproval;
 
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    approveQueue = [[NSMutableArray alloc] init];
     logEntries = [[NSMutableArray alloc] init];
     [self.window center];
     [self.window setMinSize:NSMakeSize(400, 300)];
@@ -41,7 +46,9 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+    if (!rotator.done) {
+        [rotator stop];
+    }
 }
 
 - (void)rotatorDone:(id)sender {
@@ -54,6 +61,22 @@
     [self.statusLabel setStringValue:[NSString stringWithFormat:@"Processed %lu images...",
                                       logEntries.count]];
     [self.tableView reloadData];
+    
+    [approveQueue addObject:rotation];
+    [approveQueue sortUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
+        FileRotation * rot1 = (FileRotation *)obj1;
+        FileRotation * rot2 = (FileRotation *)obj2;
+        if ([rot1 rotationSeverity] < [rot2 rotationSeverity]) {
+            return NSOrderedDescending;
+        } else if ([rot1 rotationSeverity] > [rot2 rotationSeverity]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedSame;
+        }
+    }];
+    if (!currentApprove) {
+        [self showNextApproval];
+    }
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -69,6 +92,15 @@
         return [NSNumber numberWithDouble:entry.angle * 180 / M_PI];
     }
     return nil;
+}
+
+- (void)showNextApproval {
+    currentApprove = approveQueue[0];
+    NSString * path = currentApprove.path;
+    NSImage * img = [[NSImage alloc] initWithContentsOfFile:path];
+    [self.comparisonView.left setImage:img];
+    
+    // TODO: make a rotated version of the image.
 }
 
 @end

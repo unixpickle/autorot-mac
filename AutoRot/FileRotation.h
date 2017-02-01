@@ -14,5 +14,6 @@
 @property (readwrite) double angle;
 
 - (id)initWithData:(NSData *)data;
+- (double)rotationSeverity;
 
 @end

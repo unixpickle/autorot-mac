@@ -36,4 +36,19 @@
     return self;
 }
 
+- (double)rotationSeverity {
+    double rot = self.angle;
+    while (rot < -M_PI) {
+        rot += M_PI * 2;
+    }
+    while (rot > M_PI) {
+        rot -= M_PI * 2;
+    }
+    if (rot < 0) {
+        return -rot;
+    } else {
+        return rot;
+    }
+}
+
 @end
