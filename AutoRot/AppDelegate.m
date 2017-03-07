@@ -109,7 +109,7 @@ static NSData * encodeToJPEG(NSImage * img);
     if ([tableColumn.identifier isEqualToString:@"path"]) {
         return entry.path;
     } else if ([tableColumn.identifier isEqualToString:@"angle"]) {
-        return [NSNumber numberWithDouble:entry.angle * 180 / M_PI];
+        return [NSNumber numberWithDouble:round(entry.angle * 180 / M_PI)];
     }
     return nil;
 }
