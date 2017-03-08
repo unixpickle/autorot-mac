@@ -23,6 +23,11 @@
         if (lastComma.location == NSNotFound) {
             return nil;
         }
+        str = [str substringToIndex:lastComma.location];
+        lastComma = [str rangeOfString:@"," options:NSBackwardsSearch];
+        if (lastComma.location == NSNotFound) {
+            return nil;
+        }
         NSString * unescapedPath = [str substringToIndex:lastComma.location];
         NSString * angleStr = [str substringFromIndex:lastComma.location+1];
         if ([unescapedPath hasPrefix:@"\""]) {
